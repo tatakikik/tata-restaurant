@@ -56,7 +56,7 @@ export default function Login({ token }) {
           onChange={(e) => setPassword(e.target.value)}
         ></input>
         <button className={styles.loginButton} onClick={login}>
-          Login
+          LOGIN
         </button>
         {status}
       </div>
