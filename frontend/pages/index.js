@@ -1,8 +1,10 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Layout from "../components/Layout";
+import { useRouter } from "next/router";
 
 const Home = ({ token }) => {
+  const router = useRouter();
   return (
     <Layout token={token}>
       {/* <img className={styles.images} src={"img/tata.jpg"}></img> */}
@@ -31,7 +33,14 @@ const Home = ({ token }) => {
           >
             THAI MUEANG @ PHANG-NGA
           </p>
-          <button className={styles.reserveBtn}>RESERVE</button>
+          <button
+            onClick={() => {
+              router.push("/reserve");
+            }}
+            className={styles.reserveBtn}
+          >
+            RESERVE
+          </button>
         </div>
         <img className={styles.images} src={"img/Kung.png"}></img>
       </div>

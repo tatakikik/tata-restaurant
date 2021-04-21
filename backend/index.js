@@ -1,3 +1,12 @@
+const admin = require("firebase-admin");
+const serviceAccount = require("../backend/tata.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+
+const firebasedb = admin.firestore();
+
 const express = require("express"),
   app = express(),
   passport = require("passport"),
@@ -9,6 +18,7 @@ const bcrypt = require("bcrypt");
 
 const db = require("./database.js");
 let users = db.users;
+let reserve = db.reserve;
 
 require("./passport.js");
 
@@ -82,6 +92,43 @@ router.post("/register", async (req, res) => {
     res.status(200).json({ message: `Register success` });
   } catch {
     res.status(422).json({ message: "Cannot register" });
+  }
+});
+
+router.get("/reserve", async (req, res) => {
+  try {
+    let dataList = [];
+    const snapshot = await firebasedb.collection("reserve").get();
+    await snapshot.forEach((doc) => {
+      console.log(doc.id, "=>", doc.data());
+      dataList.push(doc.data());
+    });
+    res.status(200).json({ dataList });
+  } catch {
+    res.status(422).json({ message: "Cannot reserve" });
+  }
+});
+
+router.post("/addReserve", async (req, res) => {
+  console.log(req.body);
+  const ref = firebasedb.collection("reserve").doc();
+  try {
+    await ref
+      .set({
+        reserveName: req.body.reserveName,
+        telephone: req.body.telephone,
+        date: req.body.date,
+        time: req.body.time,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    res.status(200).json({ message: "Add to Firebase" });
+  } catch {
+    res.status(404).json({ message: "Cannot reserve" });
   }
 });
 

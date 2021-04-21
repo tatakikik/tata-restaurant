@@ -148,7 +148,7 @@
 }
 
 .menucontainer {
-  width: 37vw;
+  width: 30vw;
   margin-right: 30px;
 }
 
@@ -181,6 +181,14 @@
   height: 60vh;
   background-color: #fbe690;
   padding-left: 60px;
+}
+
+.reserveCard {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 30vh;
+  background-color: #fbe690;
 }
 
 .reserveBtn {
@@ -246,6 +254,17 @@
   height: 40px;
   box-shadow: 0px 2px 2px #303030;
   outline: none;
+  cursor: pointer;
+}
+
+.registerButton {
+  outline: none;
+  border: none;
+  background-color: #fbe690;
+  width: 20vw;
+  height: 40px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .loginButton:hover {
@@ -299,6 +318,59 @@
   letter-spacing: 5px;
   font-family: "Kanit", sans-serif;
 }
+
+.reserveTitle {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: #dd2803;
+  font-size: 64px;
+  font-weight: bold;
+  margin-top: 10vh;
+}
+
+.reserveBox {
+  width: 40vw;
+  padding: 50px 50px 30px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f6ded3;
+}
+
+.reserveInputRow {
+  width: 32vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.reserveInputField {
+  margin-bottom: 20px;
+  width: 15vw;
+  height: 50px;
+  border: none;
+  background-color: #fff;
+  border-left: 3px solid #dd2803;
+  font-size: 18px;
+  padding-left: 20px;
+  outline: none;
+  font-family: "Kanit", sans-serif;
+}
+.reserveButton {
+  font-family: "Barlow", sans-serif;
+  font-size: 24px;
+  letter-spacing: 5px;
+  width: 300px;
+  height: 50px;
+  border: none;
+  background-color: #dd2803;
+  color: #fff;
+  border-radius: 20px;
+  padding: 10px 30px 10px 30px;
+  outline: none;
+  cursor: pointer;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;

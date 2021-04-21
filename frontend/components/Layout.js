@@ -7,6 +7,7 @@ const api = axios.create({
   baseURL: "http://localhost/api",
 });
 
+
 const Layout = (props) => {
   const router = useRouter();
   console.log(props);
@@ -28,7 +29,7 @@ const Layout = (props) => {
               router.push("/reserve");
             }}
           >
-            RESERVE
+            RESERVING
           </button>
           <button
             className={styles.menubutton}
@@ -65,7 +66,7 @@ const Layout = (props) => {
               router.push("/reserve");
             }}
           >
-            RESERVE
+            RESERVING
           </button>
           <button
             className={styles.menubutton}
@@ -75,14 +76,14 @@ const Layout = (props) => {
           >
             LOGIN
           </button>
-          <button
+          {/* <button
             className={styles.menubutton}
             onClick={() => {
               router.push("/register");
             }}
           >
             REGISTER
-          </button>
+          </button> */}
         </div>
       );
     }
