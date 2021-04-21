@@ -14,9 +14,9 @@ const Home = ({ token }) => {
           <p
             style={{
               color: "#dd2803",
-              fontSize: "84px",
+              fontSize: "60px",
               fontWeight: "900",
-              marginTop: "-60px",
+              marginTop: "-50px",
             }}
           >
             TATA RESTAURANT
@@ -24,9 +24,9 @@ const Home = ({ token }) => {
           <p
             style={{
               color: "#dd2803",
-              fontSize: "40px",
+              fontSize: "32px",
               fontWeight: "600",
-              marginTop: "-70px",
+              marginTop: "-20px",
             }}
           >
             THAI MUEANG @ PHANG-NGA
@@ -34,6 +34,45 @@ const Home = ({ token }) => {
           <button className={styles.reserveBtn}>RESERVE</button>
         </div>
         <img className={styles.images} src={"img/Kung.png"}></img>
+      </div>
+      <div className={styles.center}>
+        <div className={styles.suggestMenu}>
+          <div className={styles.center}>
+            <p className={styles.menuName} style={{ color: "white" }}>
+              -
+            </p>
+            <img className={styles.suggestImage} src={"img/sug1.jpg"}></img>
+            <p className={styles.menuName}>กุ้งชุบแป้งทอด</p>
+          </div>
+          <div className={styles.center}>
+            <p
+              style={{
+                fontSize: "48px",
+                fontWeight: "900",
+                marginTop: "-15px",
+              }}
+              className={styles.menuName}
+            >
+              {" "}
+              - เมนูแนะนำ -
+            </p>
+            <img className={styles.suggestImage} src={"img/sug2.jpg"}></img>
+            <p className={styles.menuName}>ปลาราดพริก</p>
+            <button
+              style={{ fontFamily: "Kanit" }}
+              className={styles.reserveBtn}
+            >
+              เมนูทั้งหมด
+            </button>
+          </div>
+          <div className={styles.center}>
+            <p className={styles.menuName} style={{ color: "white" }}>
+              -
+            </p>
+            <img className={styles.suggestImage} src={"img/sug3.jpg"}></img>
+            <p className={styles.menuName}>ปูนิ่มทอดกระเทียม</p>
+          </div>
+        </div>
       </div>
     </Layout>
   );

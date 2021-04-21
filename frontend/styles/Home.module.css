@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit&display=swap");
+
 .container {
   min-height: 100vh;
   /* padding: 0 0.5rem; */
@@ -146,7 +148,7 @@
 }
 
 .menucontainer {
-  width: 30vw;
+  width: 37vw;
   margin-right: 30px;
 }
 
@@ -250,6 +252,53 @@
   cursor: pointer;
 }
 
+.suggestImage {
+  width: 25vw;
+  height: 25vw;
+  object-fit: cover;
+}
+
+.suggestImage:hover {
+  animation-name: expands;
+  animation-duration: 1s;
+}
+
+@keyframes expands {
+  0% {
+    width: 25vw;
+    height: 25vw;
+    object-fit: cover;
+  }
+  50% {
+    width: 26vw;
+    height: 26vw;
+    object-fit: cover;
+  }
+}
+
+.suggestMenu {
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  width: 90vw;
+  padding: 50px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.center {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menuName {
+  font-size: 30px;
+  letter-spacing: 5px;
+  font-family: "Kanit", sans-serif;
+}
 @media (max-width: 600px) {
   .grid {
     width: 100%;
