@@ -160,6 +160,17 @@ router.put("/updateReserve", async (req, res) => {
   }
 });
 
+router.get("/delete", async (req, res) => {
+  console.log("DELETE ", req.headers.deleteid);
+  const ref = firebasedb.collection("reserve").doc(req.headers.deleteid);
+  try {
+    await ref.delete();
+    res.status(200).json({ message: "delete from Firebase" });
+  } catch {
+    res.status(404).json({ message: "Cannot delete" });
+  }
+});
+
 // Error Handler
 app.use((err, req, res, next) => {
   let statusCode = err.status || 500;

@@ -71,6 +71,22 @@ const Reserve = ({ token }) => {
         console.log(error);
       });
   };
+  const deleteReserve = async (id) => {
+    console.log("save delete", id);
+    await api
+      .get(`/delete`, {
+        headers: {
+          deleteID: id,
+        },
+      })
+      .then((res) => {
+        getReserve();
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const listItem = reserveList.map((res) => (
     <div key={res.id} className={styles.reserveList}>
       <div>
@@ -81,7 +97,12 @@ const Reserve = ({ token }) => {
           <button onClick={() => edit(res.id)} className={styles.miniButton}>
             EDIT
           </button>
-          <button className={styles.miniButton}>DELETE</button>
+          <button
+            onClick={() => deleteReserve(res.id)}
+            className={styles.miniButton}
+          >
+            DELETE
+          </button>
         </div>
       </div>
     </div>
