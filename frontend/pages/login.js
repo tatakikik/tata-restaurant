@@ -38,6 +38,7 @@ const Login = ({ token }) => {
         .then((res) => {
           console.log(res);
           setStatus("Login Success");
+          localStorage.setItem("user", res.data.user.username);
           window.location.replace("/");
         })
         .catch((error) => {
@@ -75,7 +76,7 @@ const Login = ({ token }) => {
     }
   };
   return (
-    <Layout token={token}>
+    <Layout userName={username} token={token}>
       <div className={styles.inputForm}>
         <p className={styles.loginTitle}>{checkType()}</p>
         <input

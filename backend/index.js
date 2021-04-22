@@ -97,13 +97,23 @@ router.post("/register", async (req, res) => {
 
 router.get("/reserve", async (req, res) => {
   try {
+    // console.log("header ", req.headers.search);
     let dataList = [];
     const snapshot = await firebasedb.collection("reserve").get();
     await snapshot.forEach((doc) => {
-      console.log(doc.id, "=>", doc.data());
-      dataList.push(doc.data());
+      // console.log("doc.data()", doc.id, "=>", doc.data());
+      let dataNew = {
+        id: doc.id,
+        data: doc.data(),
+      };
+      dataList.push(dataNew);
     });
-    res.status(200).json({ dataList });
+    console.log(dataList);
+    console.log("header ", req.headers.search);
+    let newList = dataList.filter(
+      (data) => data.data.username === req.headers.search
+    );
+    res.status(200).json({ newList });
   } catch {
     res.status(422).json({ message: "Cannot reserve" });
   }
@@ -119,6 +129,7 @@ router.post("/addReserve", async (req, res) => {
         telephone: req.body.telephone,
         date: req.body.date,
         time: req.body.time,
+        username: req.body.username,
       })
       .then((res) => {
         console.log(res);
@@ -132,72 +143,20 @@ router.post("/addReserve", async (req, res) => {
   }
 });
 
-router.get("/alluser", (req, res) => res.json(db.users.users));
+router.put("/updateReserve", async (req, res) => {
+  console.log(req.body);
+  const ref = firebasedb.collection("reserve").doc(req.body.editID);
 
-router.get("/", (req, res, next) => {
-  res.send("Respond without authentication");
-});
-
-let students = {
-  list: [
-    { id: 1, name: "Tata", surname: "kikik", major: "COE", GPA: 4.0 },
-    { id: 2, name: "Poyoon", surname: "Kikik", major: "COE", GPA: 4.0 },
-  ],
-};
-
-router
-  .route("/students")
-  .get((req, res) => {
-    res.send(students);
-  })
-  .post((req, res) => {
-    console.log(req.body);
-    let newstudent = {};
-    newstudent.id = students.list.length
-      ? students.list[students.list.length - 1].id + 1
-      : 1;
-    newstudent.name = req.body.name;
-    newstudent.surname = req.body.surname;
-    newstudent.major = req.body.major;
-    newstudent.GPA = req.body.GPA;
-    students = { list: [...students.list, newstudent] };
-    res.json(students);
-  });
-
-router
-  .route("/students/:studentid")
-  .get((req, res) => {
-    let id = students.list.findIndex(
-      (item) => +item.id == +req.params.studentid
-    );
-    res.json(students.list[id]);
-  })
-  .put((req, res) => {
-    let id = students.list.findIndex(
-      (item) => item.id == +req.params.studentid
-    );
-    students.list[id].name = req.body.name;
-    students.list[id].surname = req.body.surname;
-    students.list[id].major = req.body.major;
-    students.list[id].GPA = req.body.GPA;
-    res.json(students.list);
-  })
-  .delete((req, res) => {
-    students.list = students.list.filter(
-      (item) => +item.id !== +req.params.studentid
-    );
-    res.json(students.list);
-  });
-
-router.route("/purchase/:studentId").post((req, res) => {
-  let id = students.list.findIndex((item) => +item.id == +req.params.studentId);
-  if (id == -1) {
-    res.json({ message: "Student not found" });
-  } else {
-    students.list = students.list.filter(
-      (item) => +item.id !== +req.params.studentId
-    );
-    res.json(students.list);
+  try {
+    await ref.update({
+      reserveName: req.body.reserveName,
+      telephone: req.body.telephone,
+      date: req.body.date,
+      time: req.body.time,
+    });
+    res.status(200).json({ message: "update to Firebase" });
+  } catch {
+    res.status(404).json({ message: "Cannot update" });
   }
 });
 

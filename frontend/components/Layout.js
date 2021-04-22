@@ -7,10 +7,10 @@ const api = axios.create({
   baseURL: "http://localhost/api",
 });
 
-
 const Layout = (props) => {
   const router = useRouter();
-  console.log(props);
+  // let userName = localStorage.getItem("user");
+  // console.log("username : ", userName);
   const buttonMenu = () => {
     if (props.token != "") {
       return (
