@@ -84,9 +84,9 @@ const Home = ({ token }) => {
           <div className={styles.center}>
             <p
               style={{
-                fontSize: "48px",
+                fontSize: "35px",
                 fontWeight: "900",
-                marginTop: "-15px",
+                marginTop: "15px",
               }}
               className={styles.menuName}
             >

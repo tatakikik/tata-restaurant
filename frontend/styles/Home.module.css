@@ -148,7 +148,7 @@
 }
 
 .menucontainer {
-  width: 35vw;
+  width: 40vw;
   margin-right: 30px;
 }
 
@@ -391,7 +391,7 @@
 
 .reserveList {
   margin-top: 20px;
-  width: 10vw;
+  width: 15vw;
   margin-left: 20px;
   display: flex;
   flex-direction: column;
