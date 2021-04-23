@@ -148,7 +148,7 @@
 }
 
 .menucontainer {
-  width: 30vw;
+  width: 35vw;
   margin-right: 30px;
 }
 
@@ -413,6 +413,36 @@
   border: none;
   color: #dd2803;
   cursor: pointer;
+}
+
+.column {
+  display: flex;
+  flex-direction: row;
+}
+
+.weathercard {
+  padding: 50px;
+  width: 90vw;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+.temp {
+  margin-top: 8px;
+  font-size: 48px;
+  font-weight: bold;
+  color: #dd2803;
+}
+
+.weather {
+  margin-left: 60px;
+  margin-top: 0px;
+  font-size: 48px;
+  color: #686868;
+  font-family: "Kanit", sans-serif;
 }
 
 @media (max-width: 600px) {

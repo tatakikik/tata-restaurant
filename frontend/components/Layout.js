@@ -2,17 +2,22 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const api = axios.create({
   baseURL: "http://localhost/api",
 });
 
 const Layout = (props) => {
+  const [loginName, setLoginName] = useState("");
   const router = useRouter();
   // let userName = localStorage.getItem("user");
   // console.log("username : ", userName);
+  useEffect(() => {
+    setLoginName(localStorage.getItem("user"));
+    console.log(loginName);
+  });
   const buttonMenu = () => {
-    if (props.token != "") {
+    if (props.token != "" && loginName !== "admin") {
       return (
         <div className={styles.menucontainer}>
           <button
@@ -30,6 +35,52 @@ const Layout = (props) => {
             }}
           >
             RESERVING
+          </button>
+          <button
+            className={styles.menubutton}
+            onClick={() => {
+              api
+                .get("/logout", { withCredentials: true })
+                .then((res) => {
+                  console.log(res);
+                  window.location.reload();
+                  localStorage.removeItem("user");
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+            }}
+          >
+            LOGOUT
+          </button>
+        </div>
+      );
+    } else if (props.token != "" && loginName === "admin") {
+      return (
+        <div className={styles.menucontainer}>
+          <button
+            className={styles.menubutton}
+            onClick={() => {
+              router.push("/");
+            }}
+          >
+            HOME
+          </button>
+          <button
+            className={styles.menubutton}
+            onClick={() => {
+              router.push("/reserve");
+            }}
+          >
+            RESERVING
+          </button>
+          <button
+            className={styles.menubutton}
+            onClick={() => {
+              router.push("/adminpage");
+            }}
+          >
+            ADMIN
           </button>
           <button
             className={styles.menubutton}
@@ -77,14 +128,6 @@ const Layout = (props) => {
           >
             LOGIN
           </button>
-          {/* <button
-            className={styles.menubutton}
-            onClick={() => {
-              router.push("/register");
-            }}
-          >
-            REGISTER
-          </button> */}
         </div>
       );
     }

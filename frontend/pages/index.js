@@ -2,9 +2,37 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Layout from "../components/Layout";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import axios from "axios";
 
 const Home = ({ token }) => {
   const router = useRouter();
+  const [temp, setTemp] = useState("");
+  const [weather, setWeather] = useState("");
+  axios
+    .get(
+      "https://api.openweathermap.org/data/2.5/onecall?lat=8.403871527730571&lon=98.24652129783247&exclude=hourly,daily&lang=th&appid=2b8e238c52f39a3090db73edfb1da3c5"
+    )
+    .then((res) => {
+      console.log(res);
+      setTemp(parseInt(res.data.current.temp) - 273.15);
+      setWeather(res.data.current.weather[0].description);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  const weatherData = () => {
+    if (temp != "") {
+      return (
+        <div className={styles.column}>
+          <p className={styles.temp}>{temp.toFixed(2)} °C</p>
+          <p className={styles.weather}>{weather}</p>
+        </div>
+      );
+    }
+  };
+
   return (
     <Layout token={token}>
       {/* <img className={styles.images} src={"img/tata.jpg"}></img> */}
@@ -63,16 +91,10 @@ const Home = ({ token }) => {
               className={styles.menuName}
             >
               {" "}
-              - เมนูแนะนำ -
+              - SUGGEST MENU-
             </p>
             <img className={styles.suggestImage} src={"img/sug2.jpg"}></img>
             <p className={styles.menuName}>ปลาราดพริก</p>
-            <button
-              style={{ fontFamily: "Kanit" }}
-              className={styles.reserveBtn}
-            >
-              เมนูทั้งหมด
-            </button>
           </div>
           <div className={styles.center}>
             <p className={styles.menuName} style={{ color: "white" }}>
@@ -81,6 +103,19 @@ const Home = ({ token }) => {
             <img className={styles.suggestImage} src={"img/sug3.jpg"}></img>
             <p className={styles.menuName}>ปูนิ่มทอดกระเทียม</p>
           </div>
+        </div>
+        <div className={styles.weathercard}>
+          <p
+            style={{
+              fontSize: "36px",
+              fontWeight: "900",
+              marginTop: "-15px",
+            }}
+            className={styles.menuName}
+          >
+            WEATHER @ TATA RESTAURANT
+          </p>
+          {weatherData()}
         </div>
       </div>
     </Layout>

@@ -18,7 +18,6 @@ const bcrypt = require("bcrypt");
 
 const db = require("./database.js");
 let users = db.users;
-let reserve = db.reserve;
 
 require("./passport.js");
 
@@ -99,6 +98,7 @@ router.get("/reserve", async (req, res) => {
   try {
     // console.log("header ", req.headers.search);
     let dataList = [];
+    let newList = [];
     const snapshot = await firebasedb.collection("reserve").get();
     await snapshot.forEach((doc) => {
       // console.log("doc.data()", doc.id, "=>", doc.data());
@@ -110,9 +110,14 @@ router.get("/reserve", async (req, res) => {
     });
     console.log(dataList);
     console.log("header ", req.headers.search);
-    let newList = dataList.filter(
-      (data) => data.data.username === req.headers.search
-    );
+    if (req.headers.search !== "admin") {
+      newList = dataList.filter(
+        (data) => data.data.username === req.headers.search
+      );
+    } else {
+      newList = dataList;
+    }
+
     res.status(200).json({ newList });
   } catch {
     res.status(422).json({ message: "Cannot reserve" });
